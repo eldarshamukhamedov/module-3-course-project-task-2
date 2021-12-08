@@ -27,7 +27,7 @@ const displayHeader = () => {
         <th scope="col">Профессия</th>
         <th scope="col">Встретился, раз</th>
         <th scope="col">Оценка</th>
-        <th scope="col"></th>
+        <th />
       </tr>
     )//return React component 
     }
@@ -59,39 +59,29 @@ const displayQualities = (
     )}) //return React component 
 }
 
-//return the correct form for "человек" depends on number 
-const getRightWord4Man = (number) =>{
-    if ((number === 1) || (number>4))
-    return "человек";
-    else return "человека";
-}
-
-//return the correct form for "тусануть" depends on number 
-const getRightWord4HangOut = (number) =>{
-    if (number < 5) 
-    return "тусанёт";
-    else return "тусанут";
-}
-
-const getMessage = (numberOfUsers) =>{
-    return  numberOfUsers  > 0 
-    ? `${numberOfUsers } ${getRightWord4Man(numberOfUsers )} ${getRightWord4HangOut(numberOfUsers )} с тобой сегодня`
-    :"Никто с тобой не тусанёт";
+//return the correct message depends on the numebr of users
+const getMessage= (num,var0,var1,var2,var3) => {
+    if (num<1) return var0;
+    const lastNumber = Number(num.toString().slice(-1)); //?
+    if (lastNumber===1)
+        return `${num} ${var1} с тобой сегодня`;
+    else if ((lastNumber>=2)&&(lastNumber<=4))
+        return `${num} ${var2} с тобой сегодня`;
+    else return `${num} ${var3} с тобой сегодня`;
 }
 
 //display message obj at the top
-const renderPhrase = () =>  {
-    const badgeClass = `badge bg-${usersArray.length > 0 ? "primary":"danger"}`; 
+const renderPhrase = (numberOfUsers) =>  {
+    const badgeClass = `badge bg-${numberOfUsers > 0 ? "primary":"danger"}`; 
     return      (
-        <h3><span className={badgeClass}>{getMessage(usersArray.length)}</span></h3> 
+        <h3><span className={badgeClass}>{getMessage(numberOfUsers,"Никто с тобой не тусанёт","человек тусанёт","человека тусанут","человек тусанут")}</span></h3> 
         );
 }
 
 ///////////// main logic ///////////////////////////
-
-return (
+if (usersArray.length > 0) return (
     <>
-        {renderPhrase()}
+        {renderPhrase(usersArray.length)}
         <table className="table">
             <thead>
                 {displayHeader()}
@@ -100,6 +90,11 @@ return (
                 {displayUsers(usersArray)}
             </tbody>
         </table>
+    </>
+)
+else return (
+    <>
+        {renderPhrase(usersArray.length)}
     </>
 )
 
