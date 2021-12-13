@@ -6,9 +6,17 @@ import SearchStatus from "./searchStatus";
 const Users = ({users,...props}) => {
 
 ///////////////////// functions ///////////////////////////////
+
+
+//handle for Delete button
 const handleDeleteButton = (id) => {
     props.onDelete(id);
 }
+//handle for BookMark button
+const handleBookMarkButton = (id) => {
+    props.onBookMark(id);
+}
+
 
 //display the header
 const displayHeader = () => {
@@ -19,6 +27,7 @@ const displayHeader = () => {
         <th scope="col">Профессия</th>
         <th scope="col">Встретился, раз</th>
         <th scope="col">Оценка</th>
+        <th scope="col">Избранное</th>
         <th />
       </tr>
     )//return React component 
@@ -32,6 +41,7 @@ const  displayUsers = (
         key = {user._id} 
         user={user} 
         onDelete={handleDeleteButton}
+        onBookMarkUsers={handleBookMarkButton}
         >
         </User>
     }) //return React component 
@@ -57,7 +67,6 @@ else return (
         <SearchStatus numberOfUsers={users.length}/>
     </>
 )
-
 }
 
 export default Users;
