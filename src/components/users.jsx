@@ -7,17 +7,6 @@ const Users = ({users,...props}) => {
 
 ///////////////////// functions ///////////////////////////////
 
-
-//handle for Delete button
-const handleDeleteButton = (id) => {
-    props.onDelete(id);
-}
-//handle for BookMark button
-const handleBookMarkButton = (id) => {
-    props.onBookMark(id);
-}
-
-
 //display the header
 const displayHeader = () => {
     return (
@@ -32,6 +21,7 @@ const displayHeader = () => {
       </tr>
     )//return React component 
     }
+
 //display the table's rows for all users
 const  displayUsers = (
     users //array with users
@@ -40,8 +30,8 @@ const  displayUsers = (
         return <User 
         key = {user._id} 
         user={user} 
-        onDelete={handleDeleteButton}
-        onBookMarkUsers={handleBookMarkButton}
+        onDelete={props.onDelete}
+        onBookMarkUsers={props.onBookMark}
         >
         </User>
     }) //return React component 
@@ -70,7 +60,6 @@ else return (
 }
 
 export default Users;
-
 
 
 
